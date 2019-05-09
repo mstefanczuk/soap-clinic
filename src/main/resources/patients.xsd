@@ -1,0 +1,99 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://mstefanczuk.pl/clinic-web-service"
+           targetNamespace="http://mstefanczuk.pl/clinic-web-service" elementFormDefault="qualified">
+
+    <xs:element name="getPatientRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="pesel" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getPatientResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="patient" type="tns:patient"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createPatientRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="patient" type="tns:patient"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createPatientResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="pesel" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="makeAppointmentRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="patientPesel" type="xs:string"/>
+                <xs:element name="appointment" type="tns:appointment"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="makeAppointmentResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="appointment" type="tns:appointment"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="changeAppointmentDateTimeRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="patientPesel" type="xs:string"/>
+                <xs:element name="oldDateTime" type="xs:dateTime"/>
+                <xs:element name="newDateTime" type="xs:dateTime"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="changeAppointmentDateTimeResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="appointment" type="tns:appointment"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="patient">
+        <xs:sequence>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+            <xs:element name="pesel" type="xs:string"/>
+            <xs:element name="appointments">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="key" minOccurs="0" type="xs:dateTime"/>
+                                    <xs:element name="value" minOccurs="0" type="tns:appointment"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="appointment">
+        <xs:sequence>
+            <xs:element name="appointmentDateTime" type="xs:dateTime"/>
+            <xs:element name="roomNumber" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
