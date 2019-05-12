@@ -21,10 +21,9 @@ import java.util.Map;
 @Setter
 public class Patient {
 
-    @XmlElement(required = true)
     private String firstName;
-    @XmlElement(required = true)
     private String lastName;
+    @XmlElement(required = true)
     private String pesel;
     private Map<String, Appointment> appointments;
 

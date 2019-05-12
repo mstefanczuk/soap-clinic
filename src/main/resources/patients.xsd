@@ -68,6 +68,23 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="cancelAppointmentRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="patientPesel" type="xs:string"/>
+                <xs:element name="appointmentDateTime" type="xs:dateTime"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="cancelAppointmentResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="result" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <xs:complexType name="patient">
         <xs:sequence>
             <xs:element name="firstName" type="xs:string"/>

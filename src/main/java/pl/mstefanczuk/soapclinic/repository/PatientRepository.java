@@ -1,17 +1,13 @@
 package pl.mstefanczuk.soapclinic.repository;
 
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 import pl.mstefanczuk.clinic_web_service.Appointment;
 import pl.mstefanczuk.clinic_web_service.Patient;
+import pl.mstefanczuk.soapclinic.exception.NullPatientPeselException;
 
 import javax.annotation.PostConstruct;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,12 +40,13 @@ public class PatientRepository {
     }
 
     public Patient findPatient(String pesel) {
-        Assert.notNull(pesel, "Pesel must not be null");
+        if (pesel == null) {
+            throw new NullPatientPeselException();
+        }
         return patients.get(pesel);
     }
 
     public String createPatient(Patient patient) {
-        Assert.notNull(patient, "Patient must not be null");
         patients.put(patient.getPesel(), patient);
         return patient.getPesel();
     }
@@ -67,5 +64,14 @@ public class PatientRepository {
         patient.getAppointments().remove(oldDateTime);
         patient.getAppointments().put(newDateTime, appointment);
         return appointment;
+    }
+
+    public String cancelAppointment(String patientPesel, String appointmentDateTime) {
+        Patient patient = patients.get(patientPesel);
+        if (!patient.getAppointments().containsKey(appointmentDateTime)) {
+            return "Patient has no such appointment";
+        }
+        patient.getAppointments().remove(appointmentDateTime);
+        return "Appointment cancelled";
     }
 }

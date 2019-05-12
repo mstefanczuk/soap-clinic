@@ -56,4 +56,13 @@ public class PatientEndpoint {
         response.setAppointment(appointment);
         return response;
     }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "cancelAppointmentRequest")
+    @ResponsePayload
+    public CancelAppointmentResponse cancelAppointment(@RequestPayload CancelAppointmentRequest request) {
+        CancelAppointmentResponse response = new CancelAppointmentResponse();
+        String responseString = patientRepository.cancelAppointment(request.getPatientPesel(), request.getAppointmentDateTime());
+        response.setResponse(responseString);
+        return response;
+    }
 }
