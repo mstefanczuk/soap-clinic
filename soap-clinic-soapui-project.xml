@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="09e6e420-9081-4243-8c55-5c4330ab5f19" activeEnvironment="Default" name="soap-clinic" resourceRoot="" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="183e9c14-6bf6-4fc0-88e6-9a410a5a880c" wsaVersion="NONE" name="PatientsPortSoap11" type="wsdl" bindingName="{http://mstefanczuk.pl/clinic-web-service}PatientsPortSoap11" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/ws/patients.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/ws/patients.wsdl"><con:part><con:url>http://localhost:8080/ws/patients.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://mstefanczuk.pl/clinic-web-service" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://mstefanczuk.pl/clinic-web-service" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://mstefanczuk.pl/clinic-web-service">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://mstefanczuk.pl/clinic-web-service" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="getPatientRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="pesel" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPatientResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="patient" type="tns:patient"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createPatientRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="patient" type="tns:patient"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createPatientResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="pesel" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="makeAppointmentRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="patientPesel" type="xs:string"/>
+            <xs:element name="appointment" type="tns:appointment"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="makeAppointmentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="appointment" type="tns:appointment"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="changeAppointmentDateTimeRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="patientPesel" type="xs:string"/>
+            <xs:element name="oldDateTime" type="xs:dateTime"/>
+            <xs:element name="newDateTime" type="xs:dateTime"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="changeAppointmentDateTimeResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="appointment" type="tns:appointment"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="cancelAppointmentRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="patientPesel" type="xs:string"/>
+            <xs:element name="appointmentDateTime" type="xs:dateTime"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="cancelAppointmentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="result" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="patient">
+        <xs:sequence>
+          <xs:element name="firstName" type="xs:string"/>
+          <xs:element name="lastName" type="xs:string"/>
+          <xs:element name="pesel" type="xs:string"/>
+          <xs:element name="appointments">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element minOccurs="0" name="key" type="xs:dateTime"/>
+                      <xs:element minOccurs="0" name="value" type="tns:appointment"/>
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="appointment">
+        <xs:sequence>
+          <xs:element name="appointmentDateTime" type="xs:dateTime"/>
+          <xs:element name="roomNumber" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="changeAppointmentDateTimeRequest">
+    <wsdl:part element="tns:changeAppointmentDateTimeRequest" name="changeAppointmentDateTimeRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cancelAppointmentResponse">
+    <wsdl:part element="tns:cancelAppointmentResponse" name="cancelAppointmentResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cancelAppointmentRequest">
+    <wsdl:part element="tns:cancelAppointmentRequest" name="cancelAppointmentRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createPatientRequest">
+    <wsdl:part element="tns:createPatientRequest" name="createPatientRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createPatientResponse">
+    <wsdl:part element="tns:createPatientResponse" name="createPatientResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="makeAppointmentRequest">
+    <wsdl:part element="tns:makeAppointmentRequest" name="makeAppointmentRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPatientRequest">
+    <wsdl:part element="tns:getPatientRequest" name="getPatientRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPatientResponse">
+    <wsdl:part element="tns:getPatientResponse" name="getPatientResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeAppointmentDateTimeResponse">
+    <wsdl:part element="tns:changeAppointmentDateTimeResponse" name="changeAppointmentDateTimeResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="makeAppointmentResponse">
+    <wsdl:part element="tns:makeAppointmentResponse" name="makeAppointmentResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="PatientsPort">
+    <wsdl:operation name="changeAppointmentDateTime">
+      <wsdl:input message="tns:changeAppointmentDateTimeRequest" name="changeAppointmentDateTimeRequest"></wsdl:input>
+      <wsdl:output message="tns:changeAppointmentDateTimeResponse" name="changeAppointmentDateTimeResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cancelAppointment">
+      <wsdl:input message="tns:cancelAppointmentRequest" name="cancelAppointmentRequest"></wsdl:input>
+      <wsdl:output message="tns:cancelAppointmentResponse" name="cancelAppointmentResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createPatient">
+      <wsdl:input message="tns:createPatientRequest" name="createPatientRequest"></wsdl:input>
+      <wsdl:output message="tns:createPatientResponse" name="createPatientResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="makeAppointment">
+      <wsdl:input message="tns:makeAppointmentRequest" name="makeAppointmentRequest"></wsdl:input>
+      <wsdl:output message="tns:makeAppointmentResponse" name="makeAppointmentResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPatient">
+      <wsdl:input message="tns:getPatientRequest" name="getPatientRequest"></wsdl:input>
+      <wsdl:output message="tns:getPatientResponse" name="getPatientResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PatientsPortSoap11" type="tns:PatientsPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="changeAppointmentDateTime">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="changeAppointmentDateTimeRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="changeAppointmentDateTimeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cancelAppointment">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="cancelAppointmentRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cancelAppointmentResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createPatient">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="createPatientRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createPatientResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="makeAppointment">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="makeAppointmentRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="makeAppointmentResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPatient">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getPatientRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPatientResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PatientsPortService">
+    <wsdl:port binding="tns:PatientsPortSoap11" name="PatientsPortSoap11">
+      <soap:address location="http://localhost:8080/ws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/ws</con:endpoint></con:endpoints><con:operation id="f86fd365-02a0-4d1f-9df7-5b23d02793e0" isOneWay="false" action="" name="changeAppointmentDateTime" bindingOperationName="changeAppointmentDateTime" type="Request-Response" outputName="changeAppointmentDateTimeResponse" inputName="changeAppointmentDateTimeRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="694394c2-ebc9-42bb-b505-c96f45b4becf" name="changeAppointmentDateTime"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:clin="http://mstefanczuk.pl/clinic-web-service">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <clin:changeAppointmentDateTimeRequest>\r
+         <clin:patientPesel>90032407973</clin:patientPesel>\r
+         <clin:oldDateTime>2019-06-09T15:00:00</clin:oldDateTime>\r
+         <clin:newDateTime>2019-06-09T19:00:00</clin:newDateTime>\r
+      </clin:changeAppointmentDateTimeRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://mstefanczuk.pl/clinic-web-service/PatientsPort/changeAppointmentDateTimeRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="8a3cbf83-36a4-425f-859d-de64f4ed8370" isOneWay="false" action="" name="createPatient" bindingOperationName="createPatient" type="Request-Response" outputName="createPatientResponse" inputName="createPatientRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="9ed20437-ff09-479c-a2bc-70c735e7d945" name="createPatient"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:clin="http://mstefanczuk.pl/clinic-web-service">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <clin:createPatientRequest>\r
+         <clin:patient>\r
+            <clin:firstName>Pat</clin:firstName>\r
+            <clin:lastName>Listonosz</clin:lastName>\r
+            <clin:pesel></clin:pesel>\r
+            <clin:appointments>\r
+               <!--Zero or more repetitions:-->\r
+               <clin:entry>\r
+                  <!--Optional:-->\r
+                  <clin:key>?</clin:key>\r
+                  <!--Optional:-->\r
+                  <clin:value>\r
+                     <clin:appointmentDateTime>?</clin:appointmentDateTime>\r
+                     <clin:roomNumber>?</clin:roomNumber>\r
+                  </clin:value>\r
+               </clin:entry>\r
+            </clin:appointments>\r
+         </clin:patient>\r
+      </clin:createPatientRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://mstefanczuk.pl/clinic-web-service/PatientsPort/createPatientRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="4a7697ab-33a1-4a16-bf94-a9ebd0e25ee9" isOneWay="false" action="" name="getPatient" bindingOperationName="getPatient" type="Request-Response" outputName="getPatientResponse" inputName="getPatientRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5c13f7ec-02ab-4af5-866b-0d2cdbd412bf" name="getPatient"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:clin="http://mstefanczuk.pl/clinic-web-service">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <clin:getPatientRequest>\r
+         <clin:pesel>52112178361</clin:pesel>\r
+      </clin:getPatientRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://mstefanczuk.pl/clinic-web-service/PatientsPort/getPatientRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="1a78e731-fe27-46a1-9c2b-7212b2ff962e" isOneWay="false" action="" name="makeAppointment" bindingOperationName="makeAppointment" type="Request-Response" outputName="makeAppointmentResponse" inputName="makeAppointmentRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a3b7c174-0d60-484a-8621-311ef59624d2" name="makeAppointment"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:clin="http://mstefanczuk.pl/clinic-web-service">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <clin:makeAppointmentRequest>\r
+         <clin:patientPesel>90032407973</clin:patientPesel>\r
+         <clin:appointment>\r
+            <clin:appointmentDateTime>2019-06-09T15:00:00</clin:appointmentDateTime>\r
+            <clin:roomNumber>12</clin:roomNumber>\r
+         </clin:appointment>\r
+      </clin:makeAppointmentRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://mstefanczuk.pl/clinic-web-service/PatientsPort/makeAppointmentRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="50ecb113-5c27-4848-803f-73e6214a12d9" isOneWay="false" action="" name="cancelAppointment" bindingOperationName="cancelAppointment" type="Request-Response" outputName="cancelAppointmentResponse" inputName="cancelAppointmentRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="abfbc811-62a4-419e-ab80-02db395b52ff" name="cancelAppointment"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:clin="http://mstefanczuk.pl/clinic-web-service">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <clin:cancelAppointmentRequest>\r
+         <clin:patientPesel>52112178361</clin:patientPesel>\r
+         <clin:appointmentDateTime>2019-02-20T13:30</clin:appointmentDateTime>\r
+      </clin:cancelAppointmentRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://mstefanczuk.pl/clinic-web-service/PatientsPort/cancelAppointmentRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

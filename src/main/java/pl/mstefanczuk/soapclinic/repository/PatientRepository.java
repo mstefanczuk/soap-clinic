@@ -47,6 +47,9 @@ public class PatientRepository {
     }
 
     public String createPatient(Patient patient) {
+        if (patient.getPesel() == null) {
+            throw new NullPatientPeselException();
+        }
         patients.put(patient.getPesel(), patient);
         return patient.getPesel();
     }
